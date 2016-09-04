@@ -36,16 +36,18 @@ void loop(){
   if(Serial.available() > 0){
     recByte = Serial.read();  
   
-    if(recByte == 0){
+    if(recByte == '0'){
      digitalWrite(led,LOW);
      delay(100);
-    }else if(recByte == 1){
-      digitalWrite(led,HIGH);
+    }else if(recByte == '1'){      
       if(started) {
         //Envia um SMS para o numero selecionado. Formato sms.SendSMS(<numero>,<mensagem>)
         sms.SendSMS("04189994348161", "Arduino SMS");
-        Serial.println(1);
+        Serial.write('1');
         Serial.println("SMS enviado!");
+        digitalWrite(led,HIGH);
+        delay(500);
+        digitalWrite(led,LOW);
       }    
       delay(100);
     }
