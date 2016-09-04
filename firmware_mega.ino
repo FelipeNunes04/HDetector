@@ -141,41 +141,43 @@ void loop()
   if (acionamento == HIGH) // SE Movimento
   {    
     movimento = true;
-    boolean sms = true;
-    
+        
     while(movimento){
       Serial.println("Movimento!!");    
+      boolean sms = true;
       //se o valor lido for maior que 500, liga o led e aciona o buzzer
       if (ldrValor>= 500) {
         //Ligando o buzzer e o led
         digitalWrite(rele2,LOW);   
         digitalWrite(rele1,LOW);   
         if(sms){
-          Serial.println(1);           
+          Serial.write('1');           
           if(Serial.available() > 0){
-          recByte = Serial.read();        
-          if(recByte == 1){
-            lcd.clear();
-            lcd.setCursor(0,0);
-            lcd.print("SMS enviado !");
-            sms = false;              
-            delay(2000);
-            mensageminicial();
-          }                                        
-        }
+            recByte = Serial.read();        
+            if(recByte == '1'){
+              lcd.clear();
+              lcd.setCursor(0,0);
+              lcd.print("SMS enviado !");
+              Serial.println("SMS enviado !");
+              sms = false;              
+              delay(2000);
+              mensageminicial();
+            }                                        
+          }
         }        
         delay(2000);
       } else{      
         //Ligando o buzzer
         digitalWrite(rele2,LOW);       
         if(sms){
-          Serial.println(1);  
+          Serial.write('1');
             if(Serial.available() > 0){
             recByte = Serial.read();        
-            if(recByte == 1){
+            if(recByte == '1'){
               lcd.clear();
               lcd.setCursor(0,0);
               lcd.print("SMS enviado !");
+              Serial.println("SMS enviado !");
               sms = false;              
               delay(2000);
               mensageminicial();
