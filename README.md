@@ -12,4 +12,3 @@ Material
 * Spot e suporte
 * Chip
 * Bateria CR2032 (a conferir)
-* 
